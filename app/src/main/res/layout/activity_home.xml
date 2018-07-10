@@ -13,19 +13,6 @@
         android:layout_alignParentTop="true"
         android:theme="@style/AppTheme.AppBarOverlay">
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
-
-        <Button
-            android:id="@+id/refresh_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Refresh" />
-
     </android.support.design.widget.AppBarLayout>
 
     <android.support.design.widget.BottomNavigationView xmlns:android="http://schemas.android.com/apk/res/android"
@@ -38,16 +25,34 @@
         android:layout_gravity="start"
         app:menu="@menu/bottom_nav_bar" />
 
-    <EditText
-        android:id="@+id/etDescription"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+    <ImageButton
+        android:id="@+id/ivCamera"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="245dp"
-        android:layout_marginStart="0dp"
-        android:ems="10"
-        android:hint="Enter a description"
-        android:inputType="textShortMessage" />
+        android:layout_alignParentTop="true"
+        android:adjustViewBounds="true"
+        android:background="@color/transparent"
+        android:scaleType="fitXY"
+        android:tint="@color/black"
+        app:srcCompat="@drawable/camera_shadow_fill" />
+
+    <ImageButton
+        android:id="@+id/ivDirect"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginEnd="11dp"
+        android:layout_marginTop="12dp"
+        android:background="@color/transparent"
+        android:scaleType="fitXY"
+        app:srcCompat="@drawable/direct" />
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="461dp"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/ivCamera" />
 
 </RelativeLayout>

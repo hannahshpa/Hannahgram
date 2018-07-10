@@ -18,7 +18,6 @@ import com.parse.ParseFile;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
-import java.io.File;
 import java.util.List;
 
 public class HomeActivity extends AppCompatActivity {
@@ -59,15 +58,18 @@ public class HomeActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.post_button:
-                        final String description = descriptionInput.getText().toString();
-                        final ParseUser user = ParseUser.getCurrentUser();
-                        final File file = new File(imagePath);
-                        final ParseFile parseFile = new ParseFile(file);
-                        createPost(description, parseFile, user);
+                        final Intent intent = new Intent(HomeActivity.this, CameraActivity.class);
+                        startActivity(intent);
+                        finish();
+//                        final String description = descriptionInput.getText().toString();
+//                        final ParseUser user = ParseUser.getCurrentUser();
+//                        final File file = new File(imagePath);
+//                        final ParseFile parseFile = new ParseFile(file);
+//                        createPost(description, parseFile, user);
                         return true;
                     case R.id.user_button:
-                        final Intent intent = new Intent(HomeActivity.this, LogoutActivity.class);
-                        startActivity(intent);
+                        final Intent intent2 = new Intent(HomeActivity.this, LogoutActivity.class);
+                        startActivity(intent2);
                         finish();
                         return true;
                 }
@@ -93,10 +95,6 @@ public class HomeActivity extends AppCompatActivity {
                 }
             }
         });
-    }
-
-    public void setBottomNavigationView(BottomNavigationView bottomNavigationView) {
-        this.bottomNavigationView = bottomNavigationView;
     }
 
     private void loadTopPosts() {
