@@ -3,30 +3,30 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item android:id="@+id/home_button"
-        android:icon="@drawable/instagram_home_outline_24"
+        android:icon="@drawable/switch_home_button"
         app:showAsAction="ifRoom"
         android:enabled="true"
         android:title="" />
 
     <item android:id="@+id/search_button"
-        android:icon="@drawable/ic_vector_search_stroke"
+        android:icon="@drawable/switch_search_button"
         app:showAsAction="ifRoom"
         android:enabled="true"
         android:title="" />
     <item android:id="@+id/post_button"
-        android:icon="@drawable/instagram_new_post_outline_24"
+        android:icon="@drawable/switch_create_button"
         android:enabled="true"
         app:showAsAction="ifRoom"
         android:title="" />
     <item android:id="@+id/heart_button"
-        android:icon="@drawable/ufi_heart"
+        android:icon="@drawable/switch_heart_button"
         app:showAsAction="ifRoom"
         android:enabled="true"
         android:title="" />
 
     <item
         android:id="@+id/user_button"
-        android:icon="@drawable/instagram_user_outline_24"
+        android:icon="@drawable/switch_user_button"
         app:showAsAction="ifRoom"
         android:enabled="true"
         android:title="" />
