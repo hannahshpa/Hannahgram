@@ -32,7 +32,11 @@ public class SignUpActivity extends AppCompatActivity {
         createBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                final String username = usernameInput.getText().toString();
+                final String password = passwordInput.getText().toString();
+                final String email = emailInput.getText().toString();
 
+                createNewUser(username, password, email);
             }
         });
     }

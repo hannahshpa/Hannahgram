@@ -1,5 +1,6 @@
 package com.hannahpark.hannahgram;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -63,6 +64,11 @@ public class HomeActivity extends AppCompatActivity {
                         final File file = new File(imagePath);
                         final ParseFile parseFile = new ParseFile(file);
                         createPost(description, parseFile, user);
+                        return true;
+                    case R.id.user_button:
+                        final Intent intent = new Intent(HomeActivity.this, LogoutActivity.class);
+                        startActivity(intent);
+                        finish();
                         return true;
                 }
                 return false;

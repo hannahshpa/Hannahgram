@@ -78,19 +78,21 @@ tools:context=".LoginActivity">
         android:text="Don't have an account?              "
         android:textColor="@android:color/white" />
 
-    <TextView
-        android:id="@+id/SignUp"
+    <Button
+        android:id="@+id/signUpBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/account"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginEnd="70dp"
+        android:layout_marginEnd="52dp"
+        android:background="@drawable/shape_view_border"
         android:clickable="true"
         android:fontFamily="@font/roboto_thin"
         android:text="Sign up."
         android:textColor="@android:color/white"
         android:textSize="16sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:visibility="visible" />
 
 <ImageView
     android:id="@+id/logo"
