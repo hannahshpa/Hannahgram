@@ -59,7 +59,7 @@ public class CameraActivity extends AppCompatActivity {
                 createPost(description, parsefile, user);
 
                 final Intent intent = new Intent(CameraActivity.this, HomeActivity.class);
-                startActivity(intent);
+                setResult(2, intent);
                 finish();
             }
         });

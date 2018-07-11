@@ -74,7 +74,7 @@ public class HomeActivity extends AppCompatActivity {
                 switch (item.getItemId()) {
                     case R.id.post_button:
                         final Intent intent = new Intent(HomeActivity.this, CameraActivity.class);
-                        startActivity(intent);
+                        startActivityForResult(intent, 1);
                         finish();
                         return true;
                     case R.id.user_button:
@@ -86,6 +86,14 @@ public class HomeActivity extends AppCompatActivity {
                 return false;
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // REQUEST_CODE is defined above
+        if (resultCode == 2 && requestCode == 1) {
+            loadTopPosts();
+        }
     }
 
     private void loadTopPosts() {
@@ -102,6 +110,8 @@ public class HomeActivity extends AppCompatActivity {
                                 + objects.get(i).getDescription()
                                 + "\nusername = " + objects.get(i).getUser().getUsername()
                         );  //end of log.d
+                        mPosts.add(objects.get(i));
+                        postAdapter.notifyItemInserted(mPosts.size()-1);
                     }
                 } else {
                     e.printStackTrace();
