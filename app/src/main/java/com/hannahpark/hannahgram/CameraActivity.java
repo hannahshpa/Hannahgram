@@ -57,6 +57,10 @@ public class CameraActivity extends AppCompatActivity {
                 final ParseUser user = ParseUser.getCurrentUser();
                 final ParseFile parsefile = new ParseFile(photoFile);
                 createPost(description, parsefile, user);
+
+                final Intent intent = new Intent(CameraActivity.this, HomeActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
     }

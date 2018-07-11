@@ -65,6 +65,9 @@ public class HomeActivity extends AppCompatActivity {
 //                loadTopPosts();
 //            }
 //        });
+
+        loadTopPosts();
+
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -73,11 +76,6 @@ public class HomeActivity extends AppCompatActivity {
                         final Intent intent = new Intent(HomeActivity.this, CameraActivity.class);
                         startActivity(intent);
                         finish();
-//                        final String description = descriptionInput.getText().toString();
-//                        final ParseUser user = ParseUser.getCurrentUser();
-//                        final File file = new File(imagePath);
-//                        final ParseFile parseFile = new ParseFile(file);
-//                        createPost(description, parseFile, user);
                         return true;
                     case R.id.user_button:
                         final Intent intent2 = new Intent(HomeActivity.this, LogoutActivity.class);
