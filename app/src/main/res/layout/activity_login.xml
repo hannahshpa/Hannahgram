@@ -44,9 +44,10 @@ tools:context=".LoginActivity">
         android:background="#33cccccc"
         android:fontFamily="@font/roboto"
         android:hint="   Password"
+        android:inputType="textPassword"
         android:selectAllOnFocus="false"
-        android:textColorHint="#D0CBCB"
         android:textColor="@color/white"
+        android:textColorHint="#D0CBCB"
         android:textSize="14sp" />
 
     <Button

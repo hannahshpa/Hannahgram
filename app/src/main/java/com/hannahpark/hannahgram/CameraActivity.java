@@ -12,8 +12,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import com.hannahpark.hannahgram.model.Post;
+import com.parse.ParseException;
+import com.parse.ParseFile;
+import com.parse.ParseUser;
+import com.parse.SaveCallback;
 
 import java.io.File;
 
@@ -23,20 +30,54 @@ public class CameraActivity extends AppCompatActivity {
     public final static int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 1034;
     public String photoFileName = "photo.jpg";
     File photoFile;
+    private Button postButton;
+    private EditText etDescription;
+    private Post mPost;
+    private String mCurrentPath;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_camera);
         openCamera = findViewById(R.id.openCameraBtn);
-
+        postButton = findViewById(R.id.postButton);
+        etDescription = findViewById(R.id.etDescription);
         openCamera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 onLaunchCamera(view);
             }
         });
-    }
 
+        postButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                final String description = etDescription.getText().toString();
+                final ParseUser user = ParseUser.getCurrentUser();
+                final ParseFile parsefile = new ParseFile(photoFile);
+                createPost(description, parsefile, user);
+            }
+        });
+    }
+    private void createPost(String description, ParseFile imageFile, ParseUser user) {
+        mPost = new Post();
+        mPost.setDescription(description);
+        mPost.setImage(imageFile);
+        mPost.setUser(user);
+
+        mPost.saveInBackground(new SaveCallback() {
+            @Override
+            public void done(ParseException e) {
+                if(e == null) {
+                    Log.d("CameraActivity", "Create post success!");
+                } else {
+                    e.printStackTrace();
+                    Log.e("CameraActivity", "Couldn't create post");
+                }
+            }
+        });
+    }
     public void onLaunchCamera(View view) {
         // create Intent to take a picture and return control to the calling application
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -90,4 +131,6 @@ public class CameraActivity extends AppCompatActivity {
             }
         }
     }
+
+
 }

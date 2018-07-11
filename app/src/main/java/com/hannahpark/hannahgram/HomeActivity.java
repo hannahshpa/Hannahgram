@@ -5,19 +5,18 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
 import com.hannahpark.hannahgram.model.Post;
 import com.parse.FindCallback;
 import com.parse.ParseException;
-import com.parse.ParseFile;
-import com.parse.ParseUser;
-import com.parse.SaveCallback;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class HomeActivity extends AppCompatActivity {
@@ -26,13 +25,26 @@ public class HomeActivity extends AppCompatActivity {
     public static final String imagePath = "/Users/hannahpark/Downloads/IMG_3731.JPG";
     private EditText descriptionInput;
     private Button refreshButton;
+    RecyclerView rvPosts;
+    ArrayList<Post> mPosts;
+    PostAdapter postAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
-        refreshButton = (Button) findViewById(R.id.refresh_button);
-        descriptionInput = (EditText) findViewById(R.id.etDescription);
+        rvPosts = (RecyclerView) findViewById(R.id.rvPosts);
+        mPosts = new ArrayList<>();
+        postAdapter = new PostAdapter(mPosts);
+
+        //RecyclerView setup (layout manager, use adapter)
+        rvPosts.setLayoutManager(new LinearLayoutManager(this));
+        //set the adapter
+        rvPosts.setAdapter(postAdapter);
+
+//        refreshButton = (Button) findViewById(R.id.refresh_button);
+//        descriptionInput = (EditText) findViewById(R.id.etDescription);
 
 //        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 //        setSupportActionBar(toolbar);
@@ -46,13 +58,13 @@ public class HomeActivity extends AppCompatActivity {
 //            }
 //        });
 
-        refreshButton.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View view) {
-                loadTopPosts();
-            }
-        });
+//        refreshButton.setOnClickListener(new View.OnClickListener() {
+//
+//            @Override
+//            public void onClick(View view) {
+//                loadTopPosts();
+//            }
+//        });
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -74,25 +86,6 @@ public class HomeActivity extends AppCompatActivity {
                         return true;
                 }
                 return false;
-            }
-        });
-    }
-
-
-    private void createPost(String description, ParseFile imageFile, ParseUser user) {
-        final Post newPost = new Post();
-        newPost.setDescription(description);
-        newPost.setImage(imageFile);
-        newPost.setUser(user);
-
-        newPost.saveInBackground(new SaveCallback() {
-            @Override
-            public void done(ParseException e) {
-                if(e == null) {
-                    Log.d("HomeActivity", "Create post success!");
-                } else {
-                    e.printStackTrace();
-                }
             }
         });
     }

@@ -16,15 +16,15 @@
         android:text="Open Camera" />
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/etDescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="95dp"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Enter a description" />
+        android:hint="Enter a description"
+        android:inputType="textPersonName" />
 
     <Button
         android:id="@+id/postButton"
