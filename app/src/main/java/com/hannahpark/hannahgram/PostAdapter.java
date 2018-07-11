@@ -88,4 +88,18 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>  {
             tvCaption = (TextView) itemView.findViewById(R.id.tvCaption);
         }
     }
+
+    /* Within the RecyclerView.Adapter class */
+
+    // Clean all elements of the recycler
+    public void clear() {
+        mPosts.clear();
+        notifyDataSetChanged();
+    }
+
+    // Add a list of items -- change to type used
+    public void addAll(List<Post> list) {
+        mPosts.addAll(list);
+        notifyDataSetChanged();
+    }
 }

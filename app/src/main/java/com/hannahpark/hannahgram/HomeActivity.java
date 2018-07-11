@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -23,7 +24,7 @@ import java.util.List;
 public class HomeActivity extends AppCompatActivity {
 
     private BottomNavigationView bottomNavigationView;
-    public static final String imagePath = "/Users/hannahpark/Downloads/IMG_3731.JPG";
+    private SwipeRefreshLayout swipeContainer;
     private EditText descriptionInput;
     private Button refreshButton;
     RecyclerView rvPosts;
@@ -32,7 +33,7 @@ public class HomeActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
+        //check who user is
         ParseUser currentUser = ParseUser.getCurrentUser();
         if (currentUser == null) {
             // show login screen
@@ -42,6 +43,27 @@ public class HomeActivity extends AppCompatActivity {
         }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        // Lookup the swipe container view
+        swipeContainer = (SwipeRefreshLayout) findViewById(R.id.swipeContainer);
+        // Setup refresh listener which triggers new data loading
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                // Your code to refresh the list here.
+                // Make sure you call swipeContainer.setRefreshing(false)
+                // once the network request has completed successfully.
+                fetchTimelineAsync(0);
+                swipeContainer.setRefreshing(false);
+            }
+        });
+        // Configure the refreshing colors
+        swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light);
+
+
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
         rvPosts = (RecyclerView) findViewById(R.id.rvPosts);
         mPosts = new ArrayList<>();
@@ -152,4 +174,12 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
     }
+
+    public void fetchTimelineAsync(int page) {
+        postAdapter.clear();
+        mPosts.clear();
+        loadTopPosts();
+        postAdapter.addAll(mPosts);
+    }
+
 }
