@@ -104,32 +104,35 @@ public class HomeActivity extends AppCompatActivity {
         if (resultCode == 2 && requestCode == 1) {
 //            String postID = data.getStringExtra(" Post");
 //            System.out.println(postID + " postId");
-            final Post.Query postQuery = new Post.Query();
+          //  final Post.Query postQuery = new Post.Query();
+           // postQuery.inOrder();
 //            Post post = null;
-
-            postQuery.findInBackground(new FindCallback<Post>() {
-                @Override
-                public void done(List<Post> objects, ParseException e) {
-                    if(e == null) {
-                            mPosts.add(objects.get(objects.size()-1));
-                            postAdapter.notifyItemInserted(mPosts.size()-1);
-                            rvPosts.scrollToPosition(0);
-//                        mPosts.clear();
-//                        mPosts.addAll(objects);
-//                        postAdapter.notifyDataSetChanged();
-//                        rvPosts.scrollToPosition(0);
-                        }
-                     else {
-                        e.printStackTrace();
-                    }
-                }
-            });
+                mPosts.clear();
+                postAdapter.notifyDataSetChanged();
+                loadTopPosts();
+//            postQuery.findInBackground(new FindCallback<Post>() {
+//                @Override
+//                public void done(List<Post> objects, ParseException e) {
+//                    if(e == null) {
+//                            mPosts.add(objects.get(objects.size()-1));
+//                            postAdapter.notifyItemInserted(mPosts.size()-1);
+//                            rvPosts.scrollToPosition(0);
+////                        mPosts.clear();
+////                        mPosts.addAll(objects);
+////                        postAdapter.notifyDataSetChanged();
+////                        rvPosts.scrollToPosition(0);
+//                        }
+//                     else {
+//                        e.printStackTrace();
+//                    }
+//                }
+//            });
         }
     }
 
     private void loadTopPosts() {
         final Post.Query postQuery = new Post.Query();
-        postQuery.getTop().withUser();
+        postQuery.getTop().withUser().inOrder();
         //grab posts
         postQuery.findInBackground(new FindCallback<Post>() {
             @Override
