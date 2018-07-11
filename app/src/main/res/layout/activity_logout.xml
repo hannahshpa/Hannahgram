@@ -10,9 +10,8 @@
         android:id="@+id/logoutButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="187dp"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/ivCamera"
         android:fontFamily="@font/roboto"
         android:text="Logout"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
@@ -20,6 +19,40 @@
         android:visibility="visible"
         tools:clickable="true"
         tools:layout_editor_absoluteY="296dp" />
+
+    <ImageButton
+        android:id="@+id/ivCamera"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:adjustViewBounds="true"
+        android:background="@color/transparent"
+        android:scaleType="fitXY"
+        android:tint="@color/black"
+        app:srcCompat="@drawable/camera_shadow_fill" />
+
+    <ImageButton
+        android:id="@+id/ivDirect"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginEnd="11dp"
+        android:layout_marginTop="12dp"
+        android:background="@color/transparent"
+        android:scaleType="fitXY"
+        app:srcCompat="@drawable/direct" />
+
+    <ImageView
+        android:id="@+id/ivLogo"
+        android:layout_width="140dp"
+        android:layout_height="49dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"
+        app:srcCompat="@drawable/nav_logo_whiteout" />
 
     <android.support.design.widget.BottomNavigationView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -30,4 +63,27 @@
         android:layout_alignParentStart="true"
         android:layout_gravity="start"
         app:menu="@menu/bottom_nav_bar" />
+
+    <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/ivProfilePic"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="21dp"
+        android:layout_marginTop="70dp"
+        android:src="@drawable/profilepic" />
+
+    <TextView
+        android:id="@+id/tvUsername"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="140dp"
+        android:layout_marginTop="107dp"
+        android:fontFamily="@font/roboto"
+        android:text="Username"
+        android:textSize="18dp"
+        android:textStyle="bold" />
 </RelativeLayout>

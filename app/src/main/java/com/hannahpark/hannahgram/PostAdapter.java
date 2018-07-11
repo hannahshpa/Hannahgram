@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.hannahpark.hannahgram.model.Post;
+import com.parse.ParseException;
 
 import java.util.List;
 
@@ -38,8 +39,12 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>  {
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int i) {
         final Post post = mPosts.get(i);
-        holder.tvUsername.setText(post.getUser().getUsername());
-      //  holder.ivImage.setImageBitmap(BitmapFactory.decodeFile(post.getImage()));
+        try {
+            holder.tvUsername.setText(post.getUser().fetchIfNeeded().getUsername());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        //  holder.ivImage.setImageBitmap(BitmapFactory.decodeFile(post.getImage()));
         //holder.ivProfileImage.set
         Context context = holder.itemView.getContext();
         String caption = post.getDescription();

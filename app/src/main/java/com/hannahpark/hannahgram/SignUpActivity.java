@@ -41,6 +41,12 @@ public class SignUpActivity extends AppCompatActivity {
         });
     }
 
+    public void returnLogin(View view) {
+        final Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
     private void createNewUser(String username, String password, String email) {
         // Create the ParseUser
         ParseUser user = new ParseUser();
@@ -59,7 +65,7 @@ public class SignUpActivity extends AppCompatActivity {
                     startActivity(intent);
                     finish();
                 } else {
-                    Log.e("LoginActivity", "Login failure");
+                    Log.e("SignUpActivity", "Sign up failure");
                     e.printStackTrace();;
                 }
             }

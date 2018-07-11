@@ -25,13 +25,13 @@ tools:context=".LoginActivity">
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="169dp"
-        android:background="#33cccccc"
         android:ems="10"
         android:fontFamily="@font/roboto"
         android:hint="   Username"
         android:inputType="textPersonName"
         android:selectAllOnFocus="false"
         android:textColor="@color/white"
+        android:background="#33cccccc"
         android:textColorHint="#D0CBCB"
         android:textSize="14sp" />
 

@@ -38,4 +38,6 @@ dependencies {
     implementation 'org.parceler:parceler-api:1.1.6'
     annotationProcessor 'org.parceler:parceler:1.1.6'
     // for logging API calls to LogCat
+
+    implementation 'de.hdodenhof:circleimageview:2.2.0'
 }

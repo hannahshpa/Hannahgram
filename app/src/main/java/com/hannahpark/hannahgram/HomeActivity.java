@@ -15,6 +15,7 @@ import android.widget.EditText;
 import com.hannahpark.hannahgram.model.Post;
 import com.parse.FindCallback;
 import com.parse.ParseException;
+import com.parse.ParseUser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +32,14 @@ public class HomeActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        ParseUser currentUser = ParseUser.getCurrentUser();
+        if (currentUser == null) {
+            // show login screen
+            final Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
+            startActivity(intent);
+            finish();
+        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
@@ -75,7 +84,7 @@ public class HomeActivity extends AppCompatActivity {
                     case R.id.post_button:
                         final Intent intent = new Intent(HomeActivity.this, CameraActivity.class);
                         startActivityForResult(intent, 1);
-                        finish();
+//                        finish();
                         return true;
                     case R.id.user_button:
                         final Intent intent2 = new Intent(HomeActivity.this, LogoutActivity.class);
@@ -91,21 +100,42 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         // REQUEST_CODE is defined above
+        Log.d("HomeActivity", "on activity result!");
         if (resultCode == 2 && requestCode == 1) {
-            loadTopPosts();
+//            String postID = data.getStringExtra(" Post");
+//            System.out.println(postID + " postId");
+            final Post.Query postQuery = new Post.Query();
+//            Post post = null;
+
+            postQuery.findInBackground(new FindCallback<Post>() {
+                @Override
+                public void done(List<Post> objects, ParseException e) {
+                    if(e == null) {
+                            mPosts.add(objects.get(objects.size()-1));
+                            postAdapter.notifyItemInserted(mPosts.size()-1);
+                            rvPosts.scrollToPosition(0);
+//                        mPosts.clear();
+//                        mPosts.addAll(objects);
+//                        postAdapter.notifyDataSetChanged();
+//                        rvPosts.scrollToPosition(0);
+                        }
+                     else {
+                        e.printStackTrace();
+                    }
+                }
+            });
         }
     }
 
     private void loadTopPosts() {
         final Post.Query postQuery = new Post.Query();
         postQuery.getTop().withUser();
-
         //grab posts
         postQuery.findInBackground(new FindCallback<Post>() {
             @Override
             public void done(List<Post> objects, ParseException e) {
                 if(e == null) {
-                    for(int i = 0; i < objects.size(); ++i) {
+                    for(int i = objects.size()-1; i >= 0; i--) {
                         Log.d("HomeActivity", "Post[" + i + "] = "
                                 + objects.get(i).getDescription()
                                 + "\nusername = " + objects.get(i).getUser().getUsername()

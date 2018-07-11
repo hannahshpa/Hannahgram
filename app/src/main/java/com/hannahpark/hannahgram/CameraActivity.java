@@ -7,9 +7,12 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -34,6 +37,7 @@ public class CameraActivity extends AppCompatActivity {
     private EditText etDescription;
     private Post mPost;
     private String mCurrentPath;
+    private BottomNavigationView bottomNavigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,22 +52,44 @@ public class CameraActivity extends AppCompatActivity {
                 onLaunchCamera(view);
             }
         });
+        bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
+        bottomNavigationView.setSelectedItemId(R.id.post_button);
 
-        postButton.setOnClickListener(new View.OnClickListener() {
-
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
-            public void onClick(View view) {
-                final String description = etDescription.getText().toString();
-                final ParseUser user = ParseUser.getCurrentUser();
-                final ParseFile parsefile = new ParseFile(photoFile);
-                createPost(description, parsefile, user);
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.home_button:
+                        final Intent intent = new Intent(CameraActivity.this, HomeActivity.class);
+                        startActivity(intent);
+                        finish();
+                        return true;
 
-                final Intent intent = new Intent(CameraActivity.this, HomeActivity.class);
-                setResult(2, intent);
-                finish();
+                    case R.id.user_button:
+                        final Intent intent2 = new Intent(CameraActivity.this, LogoutActivity.class);
+                        startActivity(intent2);
+                        finish();
+                        return true;
+                }
+                return false;
             }
         });
     }
+
+    public void sendPost(View view) {
+        final String description = etDescription.getText().toString();
+        final ParseUser user = ParseUser.getCurrentUser();
+        final ParseFile parsefile = new ParseFile(photoFile);
+        createPost(description, parsefile, user);
+
+    }
+
+    public void returnHome(View view) {
+            final Intent intent = new Intent(CameraActivity.this, HomeActivity.class);
+            startActivity(intent);
+            finish();
+    }
+
     private void createPost(String description, ParseFile imageFile, ParseUser user) {
         mPost = new Post();
         mPost.setDescription(description);
@@ -75,6 +101,13 @@ public class CameraActivity extends AppCompatActivity {
             public void done(ParseException e) {
                 if(e == null) {
                     Log.d("CameraActivity", "Create post success!");
+                    final Intent intent = new Intent();
+                    intent.putExtra("Post", mPost.getObjectId());
+                    setResult(2, intent);
+                    finish();
+//                    final Intent intent = new Intent(CameraActivity.this, HomeActivity.class);
+//                    startActivity(intent);
+//                    finish();
                 } else {
                     e.printStackTrace();
                     Log.e("CameraActivity", "Couldn't create post");

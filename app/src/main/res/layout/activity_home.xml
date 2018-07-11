@@ -49,11 +49,23 @@
         android:scaleType="fitXY"
         app:srcCompat="@drawable/direct" />
 
+    <ImageView
+        android:id="@+id/ivLogo"
+        android:layout_width="140dp"
+        android:layout_height="49dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"
+        app:srcCompat="@drawable/nav_logo_whiteout" />
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rvPosts"
         android:layout_width="match_parent"
         android:layout_height="461dp"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/ivCamera" />
+
+
 
 </RelativeLayout>
