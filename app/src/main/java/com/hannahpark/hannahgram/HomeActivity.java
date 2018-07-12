@@ -10,6 +10,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.MenuItem;
+import android.widget.ProgressBar;
 
 import com.hannahpark.hannahgram.model.Post;
 import com.parse.FindCallback;
@@ -97,31 +98,12 @@ public class HomeActivity extends AppCompatActivity {
         // REQUEST_CODE is defined above
         Log.d("HomeActivity", "on activity result!");
         if (resultCode == 2 && requestCode == 1) {
-//            String postID = data.getStringExtra(" Post");
-//            System.out.println(postID + " postId");
-          //  final Post.Query postQuery = new Post.Query();
-           // postQuery.inOrder();
-//            Post post = null;
+
+
                 mPosts.clear();
                 postAdapter.notifyDataSetChanged();
                 loadTopPosts();
-//            postQuery.findInBackground(new FindCallback<Post>() {
-//                @Override
-//                public void done(List<Post> objects, ParseException e) {
-//                    if(e == null) {
-//                            mPosts.add(objects.get(objects.size()-1));
-//                            postAdapter.notifyItemInserted(mPosts.size()-1);
-//                            rvPosts.scrollToPosition(0);
-////                        mPosts.clear();
-////                        mPosts.addAll(objects);
-////                        postAdapter.notifyDataSetChanged();
-////                        rvPosts.scrollToPosition(0);
-//                        }
-//                     else {
-//                        e.printStackTrace();
-//                    }
-//                }
-//            });
+
         }
     }
 
@@ -133,6 +115,10 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void done(List<Post> objects, ParseException e) {
                 if(e == null) {
+                    // on some click or some loading we need to wait for...
+                    ProgressBar pb = (ProgressBar) findViewById(R.id.pbLoading);
+                    pb.setVisibility(ProgressBar.VISIBLE);
+
                     for(int i = objects.size()-1; i >= 0; i--) {
                         Log.d("HomeActivity", "Post[" + i + "] = "
                                 + objects.get(i).getDescription()
@@ -141,6 +127,9 @@ public class HomeActivity extends AppCompatActivity {
                         mPosts.add(objects.get(i));
                         postAdapter.notifyItemInserted(mPosts.size()-1);
                     }
+
+                    // run a background job and once complete
+                    pb.setVisibility(ProgressBar.INVISIBLE);
                 } else {
                     e.printStackTrace();
                 }
