@@ -10,7 +10,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 import com.hannahpark.hannahgram.model.Post;
 
 import org.parceler.Parcels;
@@ -48,7 +47,7 @@ public class PostDetailsActivity extends AppCompatActivity {
 
         Glide.with(getApplicationContext())
                 .load(url)
-                .apply(RequestOptions.circleCropTransform())
+//                .apply(RequestOptions.circleCropTransform())
                 .into(ivPhoto);
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {

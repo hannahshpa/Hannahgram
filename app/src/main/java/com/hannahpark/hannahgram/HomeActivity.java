@@ -10,8 +10,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.MenuItem;
-import android.widget.Button;
-import android.widget.EditText;
 
 import com.hannahpark.hannahgram.model.Post;
 import com.parse.FindCallback;
@@ -25,8 +23,6 @@ public class HomeActivity extends AppCompatActivity {
 
     private BottomNavigationView bottomNavigationView;
     private SwipeRefreshLayout swipeContainer;
-    private EditText descriptionInput;
-    private Button refreshButton;
     RecyclerView rvPosts;
     ArrayList<Post> mPosts;
     PostAdapter postAdapter;

@@ -33,7 +33,9 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="78dp"
         android:layout_marginTop="18dp"
-        android:text="username" />
+        android:text="username"
+        android:textColor="@color/black"
+        android:textStyle="bold" />
 
     <ImageView
         android:id="@+id/ivShare"
@@ -48,7 +50,6 @@
         android:layout_width="22dp"
         android:layout_height="22dp"
         android:layout_alignTop="@+id/ivHeart"
-
         android:layout_marginEnd="-78dp"
         android:layout_toStartOf="@+id/tvUsername"
         android:adjustViewBounds="true"
@@ -91,7 +92,8 @@
         android:fontFamily="@font/roboto"
         android:inputType="textMultiLine"
         android:text="This is my caption"
-        android:textSize="14sp" />
+        android:textColor="@color/black"
+        android:textSize="15sp" />
 
     <ImageButton
         android:id="@+id/ivSave"
@@ -104,5 +106,14 @@
         android:scaleType="fitXY"
         android:src="@drawable/ufi_save"
         android:tint="@color/black" />
+
+    <TextView
+        android:id="@+id/tvTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/ivPhoto"
+        android:layout_below="@+id/tvCaption"
+        android:fontFamily="@font/roboto"
+        android:text="Creation Time" />
 
 </RelativeLayout>
