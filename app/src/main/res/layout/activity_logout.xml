@@ -10,7 +10,9 @@
         android:id="@+id/logoutButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
+        android:background="@drawable/shape_view_border"
+
+        android:layout_alignEnd="@+id/ivDirect"
         android:layout_below="@+id/ivCamera"
         android:fontFamily="@font/roboto"
         android:text="Logout"
@@ -81,8 +83,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="140dp"
-        android:layout_marginTop="107dp"
+        android:layout_marginStart="131dp"
+        android:layout_marginTop="108dp"
         android:fontFamily="@font/roboto"
         android:text="Username"
         android:textColor="@color/black"
@@ -92,8 +94,27 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rvPics"
         android:layout_width="match_parent"
-        android:layout_height="325dp"
+        android:layout_height="290dp"
         android:layout_above="@+id/bottom_navigation"
         android:layout_alignParentStart="true"
         android:background="@android:color/darker_gray" />
+
+    <TextView
+        android:id="@+id/ivProfile"
+        android:layout_width="202dp"
+        android:layout_height="35dp"
+        android:layout_alignBottom="@+id/ivProfilePic"
+        android:layout_alignStart="@+id/tvUsername"
+        android:fontFamily="@font/roboto"
+        android:text="Facebook University intern '18"
+        android:textColor="@color/black" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:layout_above="@+id/rvPics"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="0dp"
+        app:srcCompat="@drawable/profile_bar" />
 </RelativeLayout>
