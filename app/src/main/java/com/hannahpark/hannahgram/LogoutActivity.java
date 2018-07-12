@@ -49,6 +49,10 @@ public class LogoutActivity extends AppCompatActivity {
                         startActivity(intent);
                         finish();
                         return true;
+                    case R.id.post_button:
+                        final Intent i = new Intent(LogoutActivity.this, CameraActivity.class);
+                        startActivity(i);
+//                        finish();
                 }
                 return false;
             }
