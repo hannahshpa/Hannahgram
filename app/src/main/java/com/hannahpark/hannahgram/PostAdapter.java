@@ -1,6 +1,7 @@
 package com.hannahpark.hannahgram;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,6 +14,8 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.hannahpark.hannahgram.model.Post;
 import com.parse.ParseException;
+
+import org.parceler.Parcels;
 
 import java.util.List;
 
@@ -73,7 +76,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>  {
         return mPosts.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         public ImageView ivProfileImage;
         public TextView tvUsername;
         public ImageView ivPhoto;
@@ -86,6 +89,26 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>  {
             tvUsername = (TextView) itemView.findViewById(R.id.tvUsername);
             ivPhoto = (ImageView) itemView.findViewById(R.id.ivPhoto);
             tvCaption = (TextView) itemView.findViewById(R.id.tvCaption);
+
+            postView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            //get the position of the item
+            int position = getAdapterPosition();
+            //check if the position is valid and exists in the view
+            if(position != RecyclerView.NO_POSITION) {
+                //get movie at selected position
+                Post post = mPosts.get(position);
+                //create the intent for this activity
+                Intent intent = new Intent(context, PostDetailsActivity.class);
+                //serialize the movie using parceler, use its short name as a key
+                intent.putExtra("post", Parcels.wrap(post));
+
+                //show the activity
+                context.startActivity(intent);
+            }
         }
     }
 

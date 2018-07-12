@@ -8,8 +8,8 @@
 
     <ImageView
         android:id="@+id/ivPhoto"
-        android:layout_width="390dp"
-        android:layout_height="390dp"
+        android:layout_width="350dp"
+        android:layout_height="350dp"
         android:layout_below="@+id/ivProfilePic"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="5dp"
@@ -22,7 +22,7 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginTop="5dp"
-        android:layout_marginLeft="5dp"
+        android:layout_marginLeft="17dp"
         android:src="@drawable/profilepic" />
 
     <TextView
@@ -31,17 +31,16 @@
         android:layout_height="30dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="62dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginStart="78dp"
+        android:layout_marginTop="18dp"
         android:text="username" />
 
     <ImageView
         android:id="@+id/ivShare"
         android:layout_width="wrap_content"
         android:layout_height="27dp"
-        android:layout_alignBottom="@+id/ivProfilePic"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="12dp"
+        android:layout_alignStart="@+id/ivSave"
+        android:layout_alignTop="@+id/tvUsername"
         app:srcCompat="@drawable/media_option_button" />
 
     <ImageButton
@@ -49,10 +48,10 @@
         android:layout_width="22dp"
         android:layout_height="22dp"
         android:layout_alignTop="@+id/ivHeart"
-        android:layout_marginEnd="-62dp"
+
+        android:layout_marginEnd="-78dp"
         android:layout_toStartOf="@+id/tvUsername"
         android:adjustViewBounds="true"
-
         android:background="@color/transparent"
         android:scaleType="fitXY"
         app:srcCompat="@drawable/ufi_comment" />
@@ -67,7 +66,6 @@
         android:layout_marginTop="5dp"
         android:background="@color/transparent"
         android:scaleType="fitXY"
-        android:layout_marginLeft="5dp"
 
         app:srcCompat="@drawable/switch_heart_button" />
 
@@ -77,7 +75,7 @@
         android:layout_height="22dp"
         android:layout_alignParentStart="true"
         android:layout_alignTop="@+id/ivComment"
-        android:layout_marginStart="77dp"
+        android:layout_marginStart="88dp"
         android:background="@color/transparent"
         android:scaleType="fitXY"
         app:srcCompat="@drawable/direct" />
@@ -99,12 +97,11 @@
         android:id="@+id/ivSave"
         android:layout_width="15dp"
         android:layout_height="22dp"
-        android:layout_alignBottom="@+id/ivDirect"
+        android:layout_alignEnd="@+id/ivPhoto"
+        android:layout_alignTop="@+id/ivComment"
         android:adjustViewBounds="true"
         android:background="@color/transparent"
         android:scaleType="fitXY"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="5dp"
         android:src="@drawable/ufi_save"
         android:tint="@color/black" />
 
