@@ -50,8 +50,8 @@
         android:layout_width="22dp"
         android:layout_height="22dp"
         android:layout_alignTop="@+id/ivHeart"
-        android:layout_marginEnd="-78dp"
-        android:layout_toStartOf="@+id/tvUsername"
+        android:layout_toRightOf="@+id/ivHeart"
+        android:layout_marginLeft="15dp"
         android:adjustViewBounds="true"
         android:background="@color/transparent"
         android:scaleType="fitXY"
@@ -74,9 +74,9 @@
         android:id="@+id/ivDirect"
         android:layout_width="22dp"
         android:layout_height="22dp"
-        android:layout_alignParentStart="true"
         android:layout_alignTop="@+id/ivComment"
-        android:layout_marginStart="88dp"
+        android:layout_toRightOf="@+id/ivComment"
+        android:layout_marginLeft="15dp"
         android:background="@color/transparent"
         android:scaleType="fitXY"
         app:srcCompat="@drawable/direct" />
@@ -109,11 +109,13 @@
 
     <TextView
         android:id="@+id/tvTime"
-        android:layout_width="wrap_content"
+        android:layout_width="134dp"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/ivPhoto"
-        android:layout_below="@+id/tvCaption"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/ivComment"
+        android:layout_marginEnd="39dp"
         android:fontFamily="@font/roboto"
+        android:gravity="right"
         android:text="Creation Time" />
 
 </RelativeLayout>

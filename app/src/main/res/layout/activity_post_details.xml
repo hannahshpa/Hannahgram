@@ -42,8 +42,10 @@
         android:id="@+id/ivShare"
         android:layout_width="wrap_content"
         android:layout_height="27dp"
+        android:layout_alignParentEnd="true"
+
         android:layout_alignTop="@+id/tvUsername"
-        android:layout_toStartOf="@+id/ivSave"
+        android:layout_marginEnd="12dp"
         app:srcCompat="@drawable/media_option_button" />
 
     <ImageButton
@@ -51,10 +53,9 @@
         android:layout_width="22dp"
         android:layout_height="22dp"
         android:layout_alignTop="@+id/ivHeart"
-        android:layout_marginEnd="-67dp"
-        android:layout_toStartOf="@+id/tvUsername"
+android:layout_toRightOf="@+id/ivHeart"
+        android:layout_marginLeft="15dp"
         android:adjustViewBounds="true"
-
         android:background="@color/transparent"
         android:scaleType="fitXY"
         app:srcCompat="@drawable/ufi_comment" />
@@ -69,7 +70,7 @@
         android:layout_marginTop="5dp"
         android:background="@color/transparent"
         android:scaleType="fitXY"
-        android:layout_marginLeft="5dp"
+        android:layout_marginLeft="35dp"
 android:clickable="true"
         app:srcCompat="@drawable/switch_heart_button" />
 
@@ -77,20 +78,19 @@ android:clickable="true"
         android:id="@+id/ivDirect"
         android:layout_width="22dp"
         android:layout_height="22dp"
-        android:layout_alignParentStart="true"
         android:layout_alignTop="@+id/ivComment"
-        android:layout_marginStart="77dp"
+ android:layout_toRightOf="@+id/ivComment"
+        android:layout_marginLeft="15dp"
         android:background="@color/transparent"
         android:scaleType="fitXY"
         app:srcCompat="@drawable/direct" />
 
     <TextView
         android:id="@+id/tvCaption"
-        android:layout_width="match_parent"
+        android:layout_width="316dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
+        android:layout_alignLeft="@+id/ivHeart"
         android:layout_below="@+id/ivComment"
-        android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
         android:layout_marginTop="5dp"
         android:ems="10"
@@ -104,12 +104,12 @@ android:clickable="true"
         android:id="@+id/ivSave"
         android:layout_width="15dp"
         android:layout_height="22dp"
-        android:layout_alignBottom="@+id/ivDirect"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/ivComment"
+        android:layout_marginEnd="36dp"
         android:adjustViewBounds="true"
         android:background="@color/transparent"
         android:scaleType="fitXY"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="5dp"
         android:src="@drawable/ufi_save"
         android:tint="@color/black" />
 
@@ -119,16 +119,18 @@ android:clickable="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        app:itemIconTint="@color/tab_selector"
         android:layout_alignParentStart="true"
         android:layout_gravity="start"
         app:menu="@menu/bottom_nav_bar" />
 
     <TextView
         android:id="@+id/tvTime"
-        android:layout_width="144dp"
+        android:layout_width="173dp"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/ivComment"
-        android:layout_toStartOf="@+id/ivShare"
+        android:layout_toLeftOf="@+id/ivSave"
+        android:layout_marginRight="8dp"
         android:fontFamily="@font/roboto"
         android:gravity="right"
         android:text="Created At" />
