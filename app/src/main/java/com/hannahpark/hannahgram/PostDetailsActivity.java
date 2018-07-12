@@ -6,7 +6,6 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.text.format.DateUtils;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
@@ -107,12 +106,18 @@ public class PostDetailsActivity extends AppCompatActivity {
     public void like(View view) {
 
         view.setSelected(!view.isSelected());
-        Number number = post.getLikes().intValue() + 1;
-        Log.d("likes", String.valueOf(number));
-        post.setLikes(number);
-        Log.d("getlikes", String.valueOf(post.getLikes()));
-        post.saveInBackground();
 
+        Number number;
+
+        if(view.isSelected()) {
+            number = post.getLikes().intValue() + 1;
+        }
+        else
+            number = post.getLikes().intValue() - 1;
+
+        post.setLikes(number);
+
+        post.saveInBackground();
 
         String numLikes = post.getLikes().toString();
         if(numLikes != "1")

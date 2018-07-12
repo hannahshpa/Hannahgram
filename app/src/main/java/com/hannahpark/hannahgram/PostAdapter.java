@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.text.format.DateUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -76,14 +75,6 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>  {
                 .apply(RequestOptions.circleCropTransform())
                 .into(holder.ivPhoto);
 
-//        holder.ivPicture.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Context context = v.getContext();
-//                Intent intent = DetailActivity.newIntent(context, post);
-//                NavigationUtils.navigate(context, intent);
-//            }
-//        });
 
     }
 
@@ -123,12 +114,17 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>  {
                     Post post = mPosts.get(position);
                     view.setSelected(!view.isSelected());
 
-                    Number number = post.getLikes().intValue() + 1;
-                    Log.d("likes", String.valueOf(number));
+                    Number number;
+                    if(view.isSelected()) {
+                        number = post.getLikes().intValue() + 1;
+                    }
+                    else
+                        number = post.getLikes().intValue() - 1;
+
                     post.setLikes(number);
-                    Log.d("getlikes", String.valueOf(post.getLikes()));
 
                     post.saveInBackground();
+
                 }
             });
             ivSave.setOnClickListener(new View.OnClickListener() {
