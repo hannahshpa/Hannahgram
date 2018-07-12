@@ -95,6 +95,7 @@ public class CameraActivity extends AppCompatActivity {
         mPost.setDescription(description);
         mPost.setImage(imageFile);
         mPost.setUser(user);
+        mPost.setLikes(0);
 
         mPost.saveInBackground(new SaveCallback() {
             @Override
@@ -105,9 +106,6 @@ public class CameraActivity extends AppCompatActivity {
                     intent.putExtra("Post", mPost.getObjectId());
                     setResult(2, intent);
                     finish();
-//                    final Intent intent = new Intent(CameraActivity.this, HomeActivity.class);
-//                    startActivity(intent);
-//                    finish();
                 } else {
                     e.printStackTrace();
                     Log.e("CameraActivity", "Couldn't create post");
@@ -115,6 +113,7 @@ public class CameraActivity extends AppCompatActivity {
             }
         });
     }
+
     public void onLaunchCamera(View view) {
         // create Intent to take a picture and return control to the calling application
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);

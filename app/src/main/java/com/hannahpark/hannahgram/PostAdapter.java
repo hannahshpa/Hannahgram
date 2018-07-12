@@ -5,9 +5,11 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.text.format.DateUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -56,6 +58,9 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>  {
         String url = post.getImage().getUrl();
         holder.tvCaption.setText(caption);
 
+        if(post.getLikes().intValue() != 0)
+            holder.ivHeart.setSelected(true);
+
         //get relative time
         Date currentDate = new Date();
         long currentDateLong = currentDate.getTime();
@@ -93,6 +98,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>  {
         public ImageView ivPhoto;
         public TextView tvCaption;
         public TextView tvTime;
+        public ImageButton ivHeart;
+        public ImageButton ivSave;
 
         public ViewHolder(View postView) {
             super(postView);
@@ -102,8 +109,34 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>  {
             ivPhoto = (ImageView) itemView.findViewById(R.id.ivPhoto);
             tvCaption = (TextView) itemView.findViewById(R.id.tvCaption);
             tvTime = (TextView) itemView.findViewById(R.id.tvTime);
+            ivHeart = (ImageButton) itemView.findViewById(R.id.ivHeart);
+            ivSave = (ImageButton) itemView.findViewById(R.id.ivSave);
+
 
             postView.setOnClickListener(this);
+            ivHeart.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    //get the position of the item
+                    int position = getAdapterPosition();
+                    //check if the position is valid and exists in the view
+                    Post post = mPosts.get(position);
+                    view.setSelected(!view.isSelected());
+
+                    Number number = post.getLikes().intValue() + 1;
+                    Log.d("likes", String.valueOf(number));
+                    post.setLikes(number);
+                    Log.d("getlikes", String.valueOf(post.getLikes()));
+
+                    post.saveInBackground();
+                }
+            });
+            ivSave.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    view.setSelected(!view.isSelected());
+                }
+            });
         }
 
         @Override
@@ -111,7 +144,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>  {
             //get the position of the item
             int position = getAdapterPosition();
             //check if the position is valid and exists in the view
-            if(position != RecyclerView.NO_POSITION) {
+            if (position != RecyclerView.NO_POSITION) {
                 //get movie at selected position
                 Post post = mPosts.get(position);
                 //create the intent for this activity
@@ -123,6 +156,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>  {
                 context.startActivity(intent);
             }
         }
+
     }
 
     /* Within the RecyclerView.Adapter class */
@@ -138,4 +172,6 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>  {
         mPosts.addAll(list);
         notifyDataSetChanged();
     }
+
+
 }

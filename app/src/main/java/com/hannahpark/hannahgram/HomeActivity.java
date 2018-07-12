@@ -98,12 +98,9 @@ public class HomeActivity extends AppCompatActivity {
         // REQUEST_CODE is defined above
         Log.d("HomeActivity", "on activity result!");
         if (resultCode == 2 && requestCode == 1) {
-
-
                 mPosts.clear();
                 postAdapter.notifyDataSetChanged();
                 loadTopPosts();
-
         }
     }
 

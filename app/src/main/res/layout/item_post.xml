@@ -63,11 +63,11 @@
         android:layout_height="22dp"
         android:layout_alignStart="@+id/ivPhoto"
         android:layout_below="@+id/ivPhoto"
+        android:onClick="like"
         android:adjustViewBounds="true"
         android:layout_marginTop="5dp"
         android:background="@color/transparent"
         android:scaleType="fitXY"
-
         app:srcCompat="@drawable/switch_heart_button" />
 
     <ImageButton
@@ -104,7 +104,7 @@
         android:adjustViewBounds="true"
         android:background="@color/transparent"
         android:scaleType="fitXY"
-        android:src="@drawable/ufi_save"
+        android:src="@drawable/switch_save_button"
         android:tint="@color/black" />
 
     <TextView

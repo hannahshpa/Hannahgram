@@ -6,7 +6,10 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.text.format.DateUtils;
+import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -26,6 +29,8 @@ public class PostDetailsActivity extends AppCompatActivity {
     public TextView tvCaption;
     public TextView tvTime;
     private BottomNavigationView bottomNavigationView;
+    public ImageButton ivHeart;
+    public TextView tvLikes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,9 +44,14 @@ public class PostDetailsActivity extends AppCompatActivity {
         ivPhoto = (ImageView) findViewById(R.id.ivPhoto);
         tvCaption = (TextView) findViewById(R.id.tvCaption);
         tvTime = (TextView) findViewById(R.id.tvTime);
+        ivHeart = (ImageButton) findViewById(R.id.ivHeart);
+        tvLikes = (TextView) findViewById(R.id.tvLikes);
 
         //unwrap post
         post = (Post) Parcels.unwrap(getIntent().getParcelableExtra("post"));
+
+        if(post.getLikes().intValue() != 0)
+            ivHeart.setSelected(true);
 
         //relative time
         //get relative time
@@ -55,6 +65,12 @@ public class PostDetailsActivity extends AppCompatActivity {
 
         tvUsername.setText(post.getUser().getUsername());
         tvCaption.setText(post.getDescription());
+
+        String numLikes = post.getLikes().toString();
+        if(numLikes != "1")
+            tvLikes.setText(numLikes + " likes");
+        else
+            tvLikes.setText(numLikes + " like");
 
         String url = post.getImage().getUrl();
 
@@ -86,5 +102,26 @@ public class PostDetailsActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    public void like(View view) {
+
+        view.setSelected(!view.isSelected());
+        Number number = post.getLikes().intValue() + 1;
+        Log.d("likes", String.valueOf(number));
+        post.setLikes(number);
+        Log.d("getlikes", String.valueOf(post.getLikes()));
+        post.saveInBackground();
+
+
+        String numLikes = post.getLikes().toString();
+        if(numLikes != "1")
+            tvLikes.setText(numLikes + " likes");
+        else
+            tvLikes.setText(numLikes + " like");
+    }
+
+    public void save(View view) {
+        view.setSelected(!view.isSelected());
     }
 }
