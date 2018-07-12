@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,7 @@ import com.parse.ParseException;
 
 import org.parceler.Parcels;
 
+import java.util.Date;
 import java.util.List;
 
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>  {
@@ -53,7 +55,15 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>  {
         String caption = post.getDescription();
         String url = post.getImage().getUrl();
         holder.tvCaption.setText(caption);
-        holder.tvTime.setText(post.getCreatedAt().toString());
+
+        //get relative time
+        Date currentDate = new Date();
+        long currentDateLong = currentDate.getTime();
+        long oldDate = post.getCreatedAt().getTime();
+
+        CharSequence relativeTime = DateUtils
+                .getRelativeTimeSpanString(oldDate, currentDateLong, 0);
+        holder.tvTime.setText(relativeTime);
 
         Glide.with(context)
                 .load(url)

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
+import android.text.format.DateUtils;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -13,6 +14,8 @@ import com.bumptech.glide.Glide;
 import com.hannahpark.hannahgram.model.Post;
 
 import org.parceler.Parcels;
+
+import java.util.Date;
 
 public class PostDetailsActivity extends AppCompatActivity {
 
@@ -39,7 +42,17 @@ public class PostDetailsActivity extends AppCompatActivity {
 
         //unwrap post
         post = (Post) Parcels.unwrap(getIntent().getParcelableExtra("post"));
-        tvTime.setText(post.getCreatedAt().toString());
+
+        //relative time
+        //get relative time
+        Date currentDate = new Date();
+        long currentDateLong = currentDate.getTime();
+        long oldDate = post.getCreatedAt().getTime();
+
+        CharSequence relativeTime = DateUtils
+                .getRelativeTimeSpanString(oldDate, currentDateLong, 0);
+        tvTime.setText(relativeTime);
+
         tvUsername.setText(post.getUser().getUsername());
         tvCaption.setText(post.getDescription());
 
