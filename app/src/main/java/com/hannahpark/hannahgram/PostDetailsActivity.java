@@ -33,6 +33,7 @@ public class PostDetailsActivity extends AppCompatActivity {
     @BindView(R.id.ivHeart) ImageButton ivHeart;
     @BindView(R.id.tvLikes) TextView tvLikes;
     @BindView(R.id.bottom_navigation) BottomNavigationView bottomNavigationView;
+    @BindView(R.id.ivComment) ImageButton ivComment;
 
 
     @Override
@@ -102,6 +103,53 @@ public class PostDetailsActivity extends AppCompatActivity {
             }
         });
 
+//        ivComment.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                View messageView = LayoutInflater.from(PostDetailsActivity.this).inflate(R.layout.comment_item, null);
+//                // Create alert dialog builder
+//                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(PostDetailsActivity.this);
+//                // set message_item.xml to AlertDialog builder
+//                alertDialogBuilder.setView(messageView);
+//
+//                // Create alert dialog
+//                final AlertDialog alertDialog = alertDialogBuilder.create();
+//
+//                // Configure dialog button (OK)
+//                alertDialog.setButton(DialogInterface.BUTTON_POSITIVE, "Send",
+//                        new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialog, int which) {
+//                                // Define color of marker icon
+//                                BitmapDescriptor defaultMarker =
+//                                        BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN);
+//                                // Extract content from alert dialog
+//                                String title = ((EditText) alertDialog.findViewById(R.id.etTitle)).
+//                                        getText().toString();
+//                                String snippet = ((EditText) alertDialog.findViewById(R.id.etSnippet)).
+//                                        getText().toString();
+//                                // Creates and adds marker to the map
+//                                Marker marker = map.addMarker(new MarkerOptions()
+//                                        .position(point)
+//                                        .title(title)
+//                                        .snippet(snippet)
+//                                        .icon(defaultMarker));
+//                            }
+//                        });
+//
+//                // Configure dialog button (Cancel)
+//                alertDialog.setButton(DialogInterface.BUTTON_NEGATIVE, "Cancel",
+//                        new DialogInterface.OnClickListener() {
+//                            public void onClick(DialogInterface dialog, int id) { dialog.cancel(); }
+//                        });
+//
+//                // Display the dialog
+//                alertDialog.show();
+//
+//
+//            }
+//        });
+//
     }
 
     public void like(View view) {

@@ -141,4 +141,11 @@ android:clickable="true"
         android:layout_below="@+id/ivComment"
         android:text="0 likes" />
 
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rvComments"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/bottom_navigation"
+        android:layout_below="@+id/tvCaption" />
+
 </RelativeLayout>
