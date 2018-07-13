@@ -120,17 +120,30 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>  {
                         post.favorited = false;
                         number = post.getLikes().intValue() - 1;
                     }
-
                     post.setLikes(number);
-
                     post.saveInBackground();
-
                 }
             });
             ivSave.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     view.setSelected(!view.isSelected());
+                }
+            });
+
+            ivProfileImage.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(context, LogoutActivity.class);
+                    context.startActivity(intent);
+                }
+            });
+
+            tvUsername.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(context, LogoutActivity.class);
+                    context.startActivity(intent);
                 }
             });
         }

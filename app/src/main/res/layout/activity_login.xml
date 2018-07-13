@@ -9,15 +9,15 @@ android:background="@android:color/transparent"
 tools:context=".LoginActivity">
 
 
-<TextView
-    android:id="@+id/letters"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_alignParentStart="true"
-    android:layout_alignParentTop="true"
-    android:background="@drawable/instagram"
-    android:contentDescription="background"
-    android:textSize="10sp" />
+    <TextView
+        android:id="@+id/letters"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/instagram"
+        android:contentDescription="background"
+        android:textSize="10sp" />
 
     <EditText
         android:id="@+id/username_et"
@@ -35,6 +35,46 @@ tools:context=".LoginActivity">
         android:background="#33cccccc"
         android:textColorHint="#D0CBCB"
         android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/forgot"
+        android:layout_width="wrap_content"
+        android:layout_height="36dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="169dp"
+        android:layout_marginStart="59dp"
+        android:ems="10"
+        android:fontFamily="@font/roboto_thin"
+        android:inputType="textPersonName"
+        android:text="Forgot your login details?"
+        android:textColor="@android:color/white"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/help"
+        android:layout_width="142dp"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/username_et"
+        android:layout_alignTop="@+id/forgot"
+        android:background="@android:color/transparent"
+        android:clickable="true"
+        android:fontFamily="@font/roboto_thin"
+        android:text="Get help signing in."
+        android:textColor="@android:color/white"
+        android:textSize="12sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/or"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="160dp"
+        android:fontFamily="@font/roboto_thin"
+        android:text="----------------------------- OR -----------------------------"
+        android:textColor="@android:color/white" />
 
     <EditText
         android:id="@+id/password_et"
@@ -58,7 +98,7 @@ tools:context=".LoginActivity">
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="167dp"
+        android:layout_marginBottom="215dp"
         android:background="@drawable/shape_view_border"
         android:fontFamily="@font/roboto_thin"
         android:text="Log In"
@@ -105,5 +145,29 @@ tools:context=".LoginActivity">
     android:layout_centerHorizontal="true"
     android:layout_marginTop="52dp"
     app:srcCompat="@drawable/letters" />
+
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="38dp"
+        android:layout_height="28dp"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/or"
+        android:layout_marginStart="93dp"
+        android:layout_marginTop="-160dp"
+        app:srcCompat="@drawable/facebook_logo_white" />
+
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="164dp"
+        android:layout_height="31dp"
+        android:layout_below="@+id/or"
+        android:layout_marginTop="-160dp"
+        android:layout_toEndOf="@+id/imageView5"
+        android:fontFamily="@font/roboto_thin"
+        android:gravity="center"
+        android:text="Log in with Facebook"
+        android:textColor="@android:color/white" />
 
 </RelativeLayout>

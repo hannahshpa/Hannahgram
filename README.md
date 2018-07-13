@@ -21,13 +21,13 @@ The following **optional** features are implemented:
 - [X] Style the login page to look like the real Instagram login page.
 - [X] Style the feed to look like the real Instagram feed.
 - [X] User should switch between different tabs - viewing all posts (feed view), capture (camera and photo gallery view) and profile tabs (posts made) using a Bottom Navigation View.
-- [ ] User can load more posts once he or she reaches the bottom of the feed using infinite scrolling.
+- [X] User can load more posts once he or she reaches the bottom of the feed using infinite scrolling.
 - [X] Show the username and creation time for each post
 - [X] After the user submits a new post, show an indeterminate progress bar while the post is being uploaded to Parse
 - User Profiles:
    - [ ] Allow the logged in user to add a profile photo
    - [X] Display the profile photo with each post
-   - [ ] Tapping on a post's username or profile photo goes to that user's profile page
+   - [X] Tapping on a post's username or profile photo goes to that user's profile page
 - [ ] User can comment on a post and see all comments for each post in the post details screen.
 - [X] User can like a post and see number of likes for each post in the post details screen.
 - [ ] Create a custom Camera View on your phone.
@@ -39,6 +39,7 @@ The following **additional** features are implemented:
 - [X] Style the profile page to look like the real Instagram profile page.
 - [X] Style the sign up page to have an Instagram theme.
 - [X] Display the relative time rather than the timestamp for each post.
+- [X] Apply the Butterknife annotation library in order to reduce boilerplate code.
 
 Please list two areas of the assignment you'd like to **discuss further with your peers** during the next class (examples include better ways to implement something, how to extend your app in certain ways, etc):
 

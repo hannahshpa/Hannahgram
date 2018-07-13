@@ -24,6 +24,9 @@ public class HomeActivity extends AppCompatActivity {
 
     private BottomNavigationView bottomNavigationView;
     private SwipeRefreshLayout swipeContainer;
+    // Store a member variable for the listener
+    private EndlessRecyclerViewScrollListener scrollListener;
+
     RecyclerView rvPosts;
     ArrayList<Post> mPosts;
     PostAdapter postAdapter;
@@ -66,10 +69,24 @@ public class HomeActivity extends AppCompatActivity {
         mPosts = new ArrayList<>();
         postAdapter = new PostAdapter(mPosts);
 
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+
         //RecyclerView setup (layout manager, use adapter)
-        rvPosts.setLayoutManager(new LinearLayoutManager(this));
+        rvPosts.setLayoutManager(linearLayoutManager);
         //set the adapter
         rvPosts.setAdapter(postAdapter);
+
+        // Retain an instance so that you can call `resetState()` for fresh searches
+        scrollListener = new EndlessRecyclerViewScrollListener(linearLayoutManager) {
+            @Override
+            public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
+                // Triggered only when new data needs to be appended to the list
+                // Add whatever code is needed to append new items to the bottom of the list
+                loadNextData(page);
+            }
+        };
+        // Adds the scroll listener to RecyclerView
+        rvPosts.addOnScrollListener(scrollListener);
 
         loadTopPosts();
 
@@ -91,6 +108,45 @@ public class HomeActivity extends AppCompatActivity {
                 return false;
             }
         });
+    }
+
+    // Append the next page of data into the adapter
+    public void loadNextData(int offset) {
+        //  --> Send the request including an offset value (i.e `page`) as a query parameter.
+        //  --> Deserialize and construct new model objects
+        //  --> Append the new data objects to the existing set of items inside the array of items
+        //  --> Notify the adapter of the new items made with `notifyItemRangeInserted()
+        final Post.Query postQuery = new Post.Query();
+        postQuery.withUser().inOrder();
+        final int pos = offset*20;
+
+        //grab posts
+        postQuery.findInBackground(new FindCallback<Post>() {
+            @Override
+            public void done(List<Post> objects, ParseException e) {
+                if(e == null) {
+                    // on some click or some loading we need to wait for...
+                    ProgressBar pb = (ProgressBar) findViewById(R.id.pbLoading);
+                    pb.setVisibility(ProgressBar.VISIBLE);
+
+                    if(objects.size()-pos - 1 > 0) {
+                        for(int i = objects.size() - pos - 1; i >= Math.max(0,objects.size() - pos - 20); i--) {
+                            Log.d("HomeActivity", "Post[" + i + "] = "
+                                    + objects.get(i).getDescription()
+                                    + "\nusername = " + objects.get(i).getUser().getUsername()
+                            );  //end of log.d
+                            mPosts.add(objects.get(i));
+                            postAdapter.notifyItemInserted(mPosts.size()-1);
+                        }
+                    }
+                    // run a background job and once complete
+                    pb.setVisibility(ProgressBar.INVISIBLE);
+                } else {
+                    e.printStackTrace();
+                }
+            }
+        });
+
     }
 
     @Override
