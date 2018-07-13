@@ -63,7 +63,10 @@ public class PostDetailsActivity extends AppCompatActivity {
         tvUsername.setText(post.getUser().getUsername());
         tvCaption.setText(post.getDescription());
 
-        String numLikes = post.getLikes().toString();
+        String numLikes = "0";
+        if(post.getLikes() != null) {
+            numLikes = post.getLikes().toString();
+        }
         if(numLikes != "1")
             tvLikes.setText(numLikes + " likes");
         else
