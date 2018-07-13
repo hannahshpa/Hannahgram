@@ -29,7 +29,7 @@ The following **optional** features are implemented:
    - [X] Display the profile photo with each post
    - [ ] Tapping on a post's username or profile photo goes to that user's profile page
 - [ ] User can comment on a post and see all comments for each post in the post details screen.
-- [ ] User can like a post and see number of likes for each post in the post details screen.
+- [X] User can like a post and see number of likes for each post in the post details screen.
 - [ ] Create a custom Camera View on your phone.
 - [X] Run your app on your phone and use the camera to take the photo
 
@@ -38,10 +38,11 @@ The following **additional** features are implemented:
 
 - [X] Style the profile page to look like the real Instagram profile page.
 - [X] Style the sign up page to have an Instagram theme.
+- [X] Display the relative time rather than the timestamp for each post.
 
 Please list two areas of the assignment you'd like to **discuss further with your peers** during the next class (examples include better ways to implement something, how to extend your app in certain ways, etc):
 
-1.
+1. Using fragments (learn more about the proper way to integrate fragments and convert from activities to fragments)
 2.
 
 ## Video Walkthrough

@@ -14,7 +14,7 @@ public class Post extends ParseObject {
     private static final String KEY_IMAGE = "image";
     private static final String KEY_USER = "user";
     private static final String KEY_LIKES = "likes";
-    boolean favorited;
+    public boolean favorited;
 
     public Post() {
         favorited = false;

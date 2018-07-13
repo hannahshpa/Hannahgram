@@ -22,6 +22,9 @@ import org.parceler.Parcels;
 import java.util.Date;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>  {
 
     private List<Post> mPosts;
@@ -57,7 +60,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>  {
         String url = post.getImage().getUrl();
         holder.tvCaption.setText(caption);
 
-        if(post.getLikes().intValue() != 0)
+        if(post.favorited == true)
             holder.ivHeart.setSelected(true);
 
         //get relative time
@@ -84,25 +87,19 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>  {
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-        public ImageView ivProfileImage;
-        public TextView tvUsername;
-        public ImageView ivPhoto;
-        public TextView tvCaption;
-        public TextView tvTime;
-        public ImageButton ivHeart;
-        public ImageButton ivSave;
+
+        @BindView(R.id.ivProfilePic) ImageView ivProfileImage;
+        @BindView(R.id.tvUsername) TextView tvUsername;
+        @BindView(R.id.ivPhoto) ImageView ivPhoto;
+        @BindView(R.id.tvCaption) TextView tvCaption;
+        @BindView(R.id.tvTime) TextView tvTime;
+        @BindView(R.id.ivHeart) ImageButton ivHeart;
+        @BindView(R.id.ivSave) ImageButton ivSave;
+
 
         public ViewHolder(View postView) {
             super(postView);
-
-            ivProfileImage = (ImageView) itemView.findViewById(R.id.ivProfilePic);
-            tvUsername = (TextView) itemView.findViewById(R.id.tvUsername);
-            ivPhoto = (ImageView) itemView.findViewById(R.id.ivPhoto);
-            tvCaption = (TextView) itemView.findViewById(R.id.tvCaption);
-            tvTime = (TextView) itemView.findViewById(R.id.tvTime);
-            ivHeart = (ImageButton) itemView.findViewById(R.id.ivHeart);
-            ivSave = (ImageButton) itemView.findViewById(R.id.ivSave);
-
+            ButterKnife.bind(this, postView);
 
             postView.setOnClickListener(this);
             ivHeart.setOnClickListener(new View.OnClickListener() {
@@ -116,10 +113,13 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>  {
 
                     Number number;
                     if(view.isSelected()) {
+                        post.favorited = true;
                         number = post.getLikes().intValue() + 1;
                     }
-                    else
+                    else {
+                        post.favorited = false;
                         number = post.getLikes().intValue() - 1;
+                    }
 
                     post.setLikes(number);
 

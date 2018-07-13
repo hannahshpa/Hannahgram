@@ -19,37 +19,35 @@ import org.parceler.Parcels;
 
 import java.util.Date;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class PostDetailsActivity extends AppCompatActivity {
 
     Post post;
 
-    public TextView tvUsername;
-    public ImageView ivPhoto;
-    public TextView tvCaption;
-    public TextView tvTime;
-    private BottomNavigationView bottomNavigationView;
-    public ImageButton ivHeart;
-    public TextView tvLikes;
+    @BindView(R.id.tvUsername) TextView tvUsername;
+    @BindView(R.id.ivPhoto) ImageView ivPhoto;
+    @BindView(R.id.tvCaption) TextView tvCaption;
+    @BindView(R.id.tvTime) TextView tvTime;
+    @BindView(R.id.ivHeart) ImageButton ivHeart;
+    @BindView(R.id.tvLikes) TextView tvLikes;
+    @BindView(R.id.bottom_navigation) BottomNavigationView bottomNavigationView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post_details);
+        ButterKnife.bind(this);
 
-        bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
         bottomNavigationView.setSelectedItemId(R.id.search_button);
 
-        tvUsername = (TextView) findViewById(R.id.tvUsername);
-        ivPhoto = (ImageView) findViewById(R.id.ivPhoto);
-        tvCaption = (TextView) findViewById(R.id.tvCaption);
-        tvTime = (TextView) findViewById(R.id.tvTime);
-        ivHeart = (ImageButton) findViewById(R.id.ivHeart);
-        tvLikes = (TextView) findViewById(R.id.tvLikes);
 
         //unwrap post
         post = (Post) Parcels.unwrap(getIntent().getParcelableExtra("post"));
 
-        if(post.getLikes().intValue() != 0)
+        if(post.favorited == true)
             ivHeart.setSelected(true);
 
         //relative time
@@ -110,10 +108,13 @@ public class PostDetailsActivity extends AppCompatActivity {
         Number number;
 
         if(view.isSelected()) {
+            post.favorited = true;
             number = post.getLikes().intValue() + 1;
         }
-        else
+        else {
+            post.favorited = false;
             number = post.getLikes().intValue() - 1;
+        }
 
         post.setLikes(number);
 
