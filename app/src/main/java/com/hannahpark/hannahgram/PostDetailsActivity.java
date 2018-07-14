@@ -149,6 +149,7 @@ public class PostDetailsActivity extends AppCompatActivity {
                                 mComments.add(comment);
                                 commentAdapter.notifyDataSetChanged();
                                 post.setComments(mComments);
+                                post.saveInBackground();
                             }
                         });
 
