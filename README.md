@@ -49,7 +49,8 @@ Please list two areas of the assignment you'd like to **discuss further with you
 ## Video Walkthrough
 
 Here's a walkthrough of implemented user stories:
-![UpdatedWalkthrough] (WalkthroughUpdate.gif)
+![Walkthrough](WalkthroughUpdate.gif)
+
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
