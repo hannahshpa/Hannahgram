@@ -185,11 +185,11 @@ public class HomeActivity extends AppCompatActivity {
                     pb.setVisibility(ProgressBar.INVISIBLE);
                 } else {
                     e.printStackTrace();
+                    System.out.println("Posts not loading bcuz "+ e.getMessage());
                 }
             }
         });
     }
-
     public void fetchTimelineAsync(int page) {
         postAdapter.clear();
         mPosts.clear();

@@ -8,16 +8,20 @@ import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
+import java.util.ArrayList;
+
 @ParseClassName("Post")
 public class Post extends ParseObject {
     private static final String KEY_DESCRIPTION = "description";
     private static final String KEY_IMAGE = "image";
     private static final String KEY_USER = "user";
     private static final String KEY_LIKES = "likes";
+    private static final String KEY_COMMENTS = "comments";
     public boolean favorited;
 
     public Post() {
         favorited = false;
+//        setLikes(0);
     }
 
     public String getDescription() {
@@ -51,6 +55,10 @@ public class Post extends ParseObject {
         Log.d("likes change to ", String.valueOf(number));
     }
 
+    public ArrayList getComments() {return (ArrayList) getList(KEY_COMMENTS);}
+    public void setComments(ArrayList<String> comments) {
+        put(KEY_COMMENTS, comments);
+    }
 
     public static class Query extends ParseQuery<Post>{
 

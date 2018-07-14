@@ -1,13 +1,19 @@
 package com.hannahpark.hannahgram;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.format.DateUtils;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -17,6 +23,7 @@ import com.hannahpark.hannahgram.model.Post;
 
 import org.parceler.Parcels;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 import butterknife.BindView;
@@ -25,6 +32,9 @@ import butterknife.ButterKnife;
 public class PostDetailsActivity extends AppCompatActivity {
 
     Post post;
+    ArrayList<String> mComments;
+    CommentAdapter commentAdapter;
+    RecyclerView rvComments;
 
     @BindView(R.id.tvUsername) TextView tvUsername;
     @BindView(R.id.ivPhoto) ImageView ivPhoto;
@@ -47,9 +57,21 @@ public class PostDetailsActivity extends AppCompatActivity {
 
         //unwrap post
         post = (Post) Parcels.unwrap(getIntent().getParcelableExtra("post"));
+        mComments = post.getComments();
 
         if(post.favorited == true)
             ivHeart.setSelected(true);
+
+        mComments = new ArrayList<>();
+        commentAdapter = new CommentAdapter(mComments);
+        rvComments = (RecyclerView) findViewById(R.id.rvComments);
+
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+
+        //RecyclerView setup (layout manager, use adapter)
+        rvComments.setLayoutManager(linearLayoutManager);
+        //set the adapter
+        rvComments.setAdapter(commentAdapter);
 
         //relative time
         //get relative time
@@ -77,7 +99,6 @@ public class PostDetailsActivity extends AppCompatActivity {
 
         Glide.with(getApplicationContext())
                 .load(url)
-//                .apply(RequestOptions.circleCropTransform())
                 .into(ivPhoto);
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -103,53 +124,44 @@ public class PostDetailsActivity extends AppCompatActivity {
             }
         });
 
-//        ivComment.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                View messageView = LayoutInflater.from(PostDetailsActivity.this).inflate(R.layout.comment_item, null);
-//                // Create alert dialog builder
-//                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(PostDetailsActivity.this);
-//                // set message_item.xml to AlertDialog builder
-//                alertDialogBuilder.setView(messageView);
-//
-//                // Create alert dialog
-//                final AlertDialog alertDialog = alertDialogBuilder.create();
-//
-//                // Configure dialog button (OK)
-//                alertDialog.setButton(DialogInterface.BUTTON_POSITIVE, "Send",
-//                        new DialogInterface.OnClickListener() {
-//                            @Override
-//                            public void onClick(DialogInterface dialog, int which) {
-//                                // Define color of marker icon
-//                                BitmapDescriptor defaultMarker =
-//                                        BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN);
-//                                // Extract content from alert dialog
-//                                String title = ((EditText) alertDialog.findViewById(R.id.etTitle)).
-//                                        getText().toString();
-//                                String snippet = ((EditText) alertDialog.findViewById(R.id.etSnippet)).
-//                                        getText().toString();
-//                                // Creates and adds marker to the map
-//                                Marker marker = map.addMarker(new MarkerOptions()
-//                                        .position(point)
-//                                        .title(title)
-//                                        .snippet(snippet)
-//                                        .icon(defaultMarker));
-//                            }
-//                        });
-//
-//                // Configure dialog button (Cancel)
-//                alertDialog.setButton(DialogInterface.BUTTON_NEGATIVE, "Cancel",
-//                        new DialogInterface.OnClickListener() {
-//                            public void onClick(DialogInterface dialog, int id) { dialog.cancel(); }
-//                        });
-//
-//                // Display the dialog
-//                alertDialog.show();
-//
-//
-//            }
-//        });
-//
+        ivComment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                View messageView = LayoutInflater.from(PostDetailsActivity.this).inflate(R.layout.comment_dialog, null);
+                // Create alert dialog builder
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(PostDetailsActivity.this);
+                // set message_item.xml to AlertDialog builder
+                alertDialogBuilder.setView(messageView);
+
+                // Create alert dialog
+                final AlertDialog alertDialog = alertDialogBuilder.create();
+
+                // Configure dialog button (OK)
+                alertDialog.setButton(DialogInterface.BUTTON_POSITIVE, "Send",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                                // Extract content from alert dialog
+                                String comment = ((EditText) alertDialog.findViewById(R.id.etComment)).
+                                        getText().toString();
+
+                                mComments.add(comment);
+                                commentAdapter.notifyDataSetChanged();
+                                post.setComments(mComments);
+                            }
+                        });
+
+                // Configure dialog button (Cancel)
+                alertDialog.setButton(DialogInterface.BUTTON_NEGATIVE, "Cancel",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) { dialog.cancel(); }
+                        });
+                // Display the dialog
+                alertDialog.show();
+            }
+        });
+
     }
 
     public void like(View view) {
@@ -181,4 +193,5 @@ public class PostDetailsActivity extends AppCompatActivity {
     public void save(View view) {
         view.setSelected(!view.isSelected());
     }
+
 }

@@ -26,6 +26,7 @@ import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
 import java.io.File;
+import java.util.ArrayList;
 
 public class CameraActivity extends AppCompatActivity {
     private Button openCamera;
@@ -96,6 +97,7 @@ public class CameraActivity extends AppCompatActivity {
         mPost.setImage(imageFile);
         mPost.setUser(user);
         mPost.setLikes(0);
+        mPost.setComments(new ArrayList<String>());
 
         mPost.saveInBackground(new SaveCallback() {
             @Override
