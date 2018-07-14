@@ -28,7 +28,7 @@ The following **optional** features are implemented:
    - [ ] Allow the logged in user to add a profile photo
    - [X] Display the profile photo with each post
    - [X] Tapping on a post's username or profile photo goes to that user's profile page
-- [ ] User can comment on a post and see all comments for each post in the post details screen.
+- [X] User can comment on a post and see all comments for each post in the post details screen.
 - [X] User can like a post and see number of likes for each post in the post details screen.
 - [ ] Create a custom Camera View on your phone.
 - [X] Run your app on your phone and use the camera to take the photo
@@ -44,13 +44,14 @@ The following **additional** features are implemented:
 Please list two areas of the assignment you'd like to **discuss further with your peers** during the next class (examples include better ways to implement something, how to extend your app in certain ways, etc):
 
 1. Using fragments (learn more about the proper way to integrate fragments and convert from activities to fragments)
-2.
+2. Implementing the functionality of following other users
 
 ## Video Walkthrough
 
 Here's a walkthrough of implemented user stories:
 
 ![Walkthrough](Hannahgram.gif)
+![Additional comment functionality](Comments.gif)
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
